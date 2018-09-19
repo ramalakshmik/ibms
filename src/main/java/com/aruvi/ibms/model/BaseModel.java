@@ -17,39 +17,37 @@ public class BaseModel implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private String _id;
 	private String createdBy;
 	private String updatedBy;
 	private Date createdOn;
 	private Date updatedOn;
-	private char isActive;
+	private String p_status;
 
+	
+	public String get_id() {
+		return _id;
+	}
+
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+
+	
 	/**
-	 * @return the isActive
+	 * 
+	 * @return p_status
 	 */
-	public char getIsActive() {
-		return isActive;
+	public String getP_status() {
+		return p_status;
 	}
 
 	/**
-	 * @param isActive the isActive to set
+	 * 
+	 * @param p_status
 	 */
-	public void setIsActive(char isActive) {
-		this.isActive = isActive;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setP_status(String p_status) {
+		this.p_status = p_status;
 	}
 
 	/**
