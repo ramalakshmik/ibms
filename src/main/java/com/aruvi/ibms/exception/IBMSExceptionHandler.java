@@ -22,7 +22,7 @@ public class IBMSExceptionHandler extends ResponseEntityExceptionHandler {
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
 		List<String> details = new ArrayList<>();
 		details.add(ex.getLocalizedMessage());
-		ErrorResponse error = new ErrorResponse("Server Error", details);
+		ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error", details);
 		return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
@@ -30,7 +30,7 @@ public class IBMSExceptionHandler extends ResponseEntityExceptionHandler {
 	public final ResponseEntity<Object> handleRecordNotFoundException(RecordNotFoundException ex, WebRequest request) {
 		List<String> details = new ArrayList<>();
 		details.add(ex.getLocalizedMessage());
-		ErrorResponse error = new ErrorResponse("Record Not Found", details);
+		ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND, "Record Not Found", details);
 		return new ResponseEntity(error, HttpStatus.NOT_FOUND);
 	}
 
@@ -56,7 +56,7 @@ public class IBMSExceptionHandler extends ResponseEntityExceptionHandler {
 			error = objectError.getObjectName() + ", " + objectError.getDefaultMessage();
 			errors.add(error);
 		}
-		ErrorResponse errorResponse = new ErrorResponse("Validation Failed", errors);
+		ErrorResponse errorResponse = new ErrorResponse(status, "Validation Failed", errors);
 		return new ResponseEntity(errorResponse, headers, status);
 	}
 
@@ -72,7 +72,7 @@ public class IBMSExceptionHandler extends ResponseEntityExceptionHandler {
 		} else {
 			errorDetails.add(ex.getMessage());
 		}
-		errorResponse = new ErrorResponse("Invalid HTTPMessaage", errorDetails);
+		errorResponse = new ErrorResponse(status, "Invalid HTTPMessaage", errorDetails);
 		return new ResponseEntity(errorResponse, headers, status);
 	}
 }
