@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,7 +27,7 @@ public class IBMSExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(RecordNotFoundException.class)
-	public final ResponseEntity<Object> handleUserNotFoundException(RecordNotFoundException ex, WebRequest request) {
+	public final ResponseEntity<Object> handleRecordNotFoundException(RecordNotFoundException ex, WebRequest request) {
 		List<String> details = new ArrayList<>();
 		details.add(ex.getLocalizedMessage());
 		ErrorResponse error = new ErrorResponse("Record Not Found", details);
@@ -35,11 +37,42 @@ public class IBMSExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		List<String> details = new ArrayList<>();
-		for (ObjectError error : ex.getBindingResult().getAllErrors()) {
-			details.add(error.getDefaultMessage());
+		/*
+		 * List<String> details = new ArrayList<>(); for (ObjectError error :
+		 * ex.getBindingResult().getAllErrors()) {
+		 * details.add(error.getDefaultMessage()); } ErrorResponse error = new
+		 * ErrorResponse("Validation Failed", details); return new ResponseEntity(error,
+		 * HttpStatus.BAD_REQUEST);
+		 */
+		List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
+		List<ObjectError> globalErrors = ex.getBindingResult().getGlobalErrors();
+		List<String> errors = new ArrayList<>(fieldErrors.size() + globalErrors.size());
+		String error;
+		for (FieldError fieldError : fieldErrors) {
+			error = fieldError.getField() + ", " + fieldError.getDefaultMessage();
+			errors.add(error);
 		}
-		ErrorResponse error = new ErrorResponse("Validation Failed", details);
-		return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+		for (ObjectError objectError : globalErrors) {
+			error = objectError.getObjectName() + ", " + objectError.getDefaultMessage();
+			errors.add(error);
+		}
+		ErrorResponse errorResponse = new ErrorResponse("Validation Failed", errors);
+		return new ResponseEntity(errorResponse, headers, status);
+	}
+
+	@Override
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		Throwable mostSpecificCause = ex.getMostSpecificCause();
+		ErrorResponse errorResponse;
+		List<String> errorDetails = new ArrayList<>();
+		if (mostSpecificCause != null) {
+			errorDetails.add(mostSpecificCause.getClass().getName());
+			errorDetails.add(mostSpecificCause.getMessage());
+		} else {
+			errorDetails.add(ex.getMessage());
+		}
+		errorResponse = new ErrorResponse("Invalid HTTPMessaage", errorDetails);
+		return new ResponseEntity(errorResponse, headers, status);
 	}
 }
