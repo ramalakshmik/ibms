@@ -1,4 +1,4 @@
-package com.aruvi.ibms.dao.impl;
+/*package com.aruvi.ibms.dao.impl;
 
 import java.util.List;
 
@@ -40,3 +40,4 @@ public class NetworkDAOImpl implements NetworkDAO {
 	}
 
 }
+*/

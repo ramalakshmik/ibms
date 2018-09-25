@@ -1,7 +1,8 @@
-package com.aruvi.ibms.service;
+/*package com.aruvi.ibms.service;
 
 import java.util.List;
 
+import com.aruvi.ibms.dto.NetworkDTO;
 import com.aruvi.ibms.model.Network;
 
 public interface NetworkService {
@@ -14,6 +15,11 @@ public interface NetworkService {
 
 	Network update(Network network);
 
-	Network findByNetworkId(String id);
+	NetworkDTO findByNetworkName(String networkName);
+
+	void addNetwork(Network network);
+
+	List<NetworkDTO> findNetworks();
 
 }
+*/

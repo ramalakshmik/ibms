@@ -26,6 +26,6 @@ PlatformDTO addPlatform(PlatformDTO platformDto);
 
 PlatformDTO updateplatform(PlatformDTO platformDto);
 
-void deleteplatform(String id);  
+void deleteplatform(String id);
 
 }

@@ -1,4 +1,4 @@
-package com.aruvi.ibms.dao;
+/*package com.aruvi.ibms.dao;
 
 import java.util.List;
 
@@ -13,3 +13,4 @@ public interface NetworkDAO{
 	Network findOneByNetworkName(String networkName);
 
 }
+*/
