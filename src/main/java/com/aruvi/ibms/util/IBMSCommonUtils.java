@@ -8,6 +8,6 @@ public class IBMSCommonUtils {
 	public static final String STATUS_OK = "Ok";
 	public static final String CONTENT_TYPE_KEY = "contentType";
 	public static final String CONTENT_TYPE = "application/json";
-	public static final String TOTAL_RECORDS = "totalRecords";
+	public static final String TOTAL_RECORDS = "totalRecords"; 
 
 }

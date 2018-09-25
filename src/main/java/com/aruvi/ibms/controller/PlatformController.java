@@ -60,7 +60,7 @@ public class PlatformController {
 			return new ResponseEntity<List<PlatformDTO>>(HttpStatus.NOT_FOUND);
 		}
 		
-		return ResponseEntity.ok().body(platformList);
+		return ResponseEntity.ok().body(platformList); 
 	}
 	
 	/*@RequestMapping(value="/findPlat/{platformName}",method = RequestMethod.GET)
