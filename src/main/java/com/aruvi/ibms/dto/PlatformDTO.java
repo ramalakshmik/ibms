@@ -15,7 +15,7 @@ public class PlatformDTO extends BaseDTO{
 	public void setNetworkId(String networkId) {
 		this.networkId = networkId;
 	}
-	public String getNetworkName() {
+	public String getNetworkName() { 
 		return networkName;
 	}
 	public void setNetworkName(String networkName) {

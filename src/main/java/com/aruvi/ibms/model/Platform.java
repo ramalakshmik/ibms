@@ -43,7 +43,7 @@ public void setDisplayName(String displayName) {
 }
 public String getPlatformDetail() {
 	return platformDetail;
-}
+} 
 
 public void setPlatformDetail(String platformDetail) {
 	this.platformDetail = platformDetail;

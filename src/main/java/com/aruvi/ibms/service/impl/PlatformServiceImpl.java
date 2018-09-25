@@ -142,7 +142,7 @@ public class PlatformServiceImpl implements PlatformService{
 			platform.setCreatedBy(platformDto.getCreatedBy());
 			platform.setCreatedOn(platformDto.getCreatedOn());
 			platform.setUpdatedBy(platformDto.getUpdatedBy());
-			platform.setUpdatedOn(platformDto.getUpdatedOn());
+			platform.setUpdatedOn(platformDto.getUpdatedOn()); 
 			
 		}
 		platform = platformDao.savePlatform(platform);

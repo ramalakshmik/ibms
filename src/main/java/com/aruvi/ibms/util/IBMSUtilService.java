@@ -18,7 +18,7 @@ public class IBMSUtilService {
 		map.put(IBMSCommonUtils.CONTENT_TYPE_KEY, IBMSCommonUtils.CONTENT_TYPE);
 		map.put(IBMSCommonUtils.TOTAL_RECORDS,  platformList.size());
 		
-		dataResponse.add("DataResponse", map);
+		dataResponse.add("DataResponse", map); 
 		return dataResponse;
 	}
 

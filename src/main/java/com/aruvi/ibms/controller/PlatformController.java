@@ -84,7 +84,7 @@ public class PlatformController {
 		   return ResponseEntity.ok().body(platformDto);
 		}
 		}
-		//platformService.findByPlatformName(platformName);
+		//platformService.findByPlatformName(platformName); 
 		
 	}*/
 	
